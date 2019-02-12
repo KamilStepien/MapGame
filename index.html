@@ -6,12 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 </head>
 <body>
     <div id = "mainBox">
     <div id = "map">
+        <div id="boxName">
+            <ul>
+                    <li><i class="fas fa-signature"></i></li>
+                    <li> <input type="text" maxlength="11" name="" id="textName"></li>
+                    <li><input type="button" id="addName" value="Add"></i></li>
+                </ul>
+        </div>
+        <div id="boxMarkerSrc">
+            <ul>
+                <li><i class="fas fa-map-marker"></i></li>
+                <li> <input type="text" name="" id=""></li>
+                <li><input type="button" value="Add"></i></li>
+            </ul>
+           
+        </div>
         <div id = "mapView"></div>
         <div id = "position">
             <ul>
@@ -20,7 +35,7 @@
             </ul>
 
         </div>
-        <div id = "nick"></div>
+        <div id = "nick"> <p>Anonimus</p> </div>
     </div>
     <div id = "czat">ds</div>
     </div>
@@ -34,6 +49,8 @@
 let marker;
 let position;
 let map;
+let nick;
+let markerSrc;
 
 //funkcja odpowiedzialna za poruszanie markerem za pomocą przucisków w,a,s,d
 document.addEventListener("keydown" , (e)=>
@@ -64,6 +81,15 @@ document.querySelector("#mapView").addEventListener("mousemove",(e)=>
     
 
 )
+
+//funkcja dodajoca nick gracza 
+document.querySelector("#addName").addEventListener('click', (e)=>
+{
+    if(!document.querySelector("#textName").value==" ")
+    document.querySelector("#nick p").innerHTML = document.querySelector("#textName").value;
+    else
+    document.querySelector("#nick p").innerHTML = "Anonimus";
+})
 
 
 //funkcja wyswietlająca wspołrzedne
