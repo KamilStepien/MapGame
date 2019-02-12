@@ -13,7 +13,13 @@
     <div id = "mainBox">
     <div id = "map">
         <div id = "mapView"></div>
-        <div id = "position"></div>
+        <div id = "position">
+            <ul>
+                <li> <h5>x = </h6>  <p id="Lat"> </p> </li>
+                <li> <h5>y = </h6> <p id="Lng"> </p></li>
+            </ul>
+
+        </div>
         <div id = "nick"></div>
     </div>
     <div id = "czat">ds</div>
@@ -27,6 +33,7 @@
 
 let marker;
 let position;
+let map;
 
 //funkcja odpowiedzialna za poruszanie markerem za pomocą przucisków w,a,s,d
 document.addEventListener("keydown" , (e)=>
@@ -46,10 +53,28 @@ document.addEventListener("keydown" , (e)=>
         
     }
     marker.setPosition( position );
-
+    map.setCenter(position);
+    displayPosition();
 })
+// funkcja odpowiedzialna za przesuwanie markera za pomocą myszki
+document.querySelector("#mapView").addEventListener("mousemove",(e)=>
+    {
+        
+    }
+    
 
-   
+)
+
+
+//funkcja wyswietlająca wspołrzedne
+function displayPosition()
+{
+    document.querySelector("#Lat").innerHTML  = position.lat.toFixed(2) ;
+    document.querySelector("#Lng").innerHTML  =  position.lng.toFixed(2);
+}
+
+
+
 
 /*
 //Tworzymy websocket
@@ -83,7 +108,7 @@ function mapaStart()
     
                 position = { lat: 50, lng: 50 };
                 // The map, centered at position
-                let map =  new google.maps.Map(document.querySelector("#mapView"),
+                 map =  new google.maps.Map(document.querySelector("#mapView"),
                     {
                         zoom: 5,
                         center: position,

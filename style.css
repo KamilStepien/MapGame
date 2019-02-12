@@ -1,11 +1,25 @@
 
+
+ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 body{
     display: flex;
     justify-content: center;
     padding-top: 10px;
 }
 
+p , h5{
+    margin: 0;
+}
 
+h5{
+    font-size: 18px;
+    font-weight: 600;
+}
 
 #mainBox
 {
@@ -36,19 +50,42 @@ body{
 {
     position: absolute;
     right: 0;
-    background-color:red;
-    width: 100px;
+    background-color:white;
+    width: 70px;
     height: 50px;
+    padding: 5px 10px;
     z-index: 10;
+    border-radius: 3px 3px 3px 3px ;
 }
+
+#position ul
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#position li
+{
+    display: flex;
+    width: 100%;
+    align-content: center;
+    
+}
+#position li p
+{
+    margin-left: 5px;
+}
+
 #nick
 {
     position: absolute;
     left: 0;
-    background-color:black;
+    background-color:white;
     width: 100px;
     height: 30px;
     z-index: 10;
+    border-radius: 3px 3px 3px 3px ;
 }
 
 #czat
