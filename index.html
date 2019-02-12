@@ -20,14 +20,36 @@
     </div>
 </body>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARkS-dsh-7IirtcQg3oSZEHudV6Uw9Iic&callback=mapaStart" async
+        defer>
+</script>
 <script>
 
 let marker;
+let position;
 
+//funkcja odpowiedzialna za poruszanie markerem za pomocą przucisków w,a,s,d
+document.addEventListener("keydown" , (e)=>
+{
+    
+    switch(e.keyCode)
+    {
+        case 87:   position.lat+=0.05;
+        break;
+        case 83:  position.lat-=0.05;
+        break;
+        case 68:  position.lng+=0.05;
+        break;
+        case 65:  position.lng-=0.05;
+        break;
+        break;
+        
+    }
+    marker.setPosition( position );
 
+})
 
-
-
+   
 
 /*
 //Tworzymy websocket
@@ -59,7 +81,7 @@ socket.addEventListener('message', function(event) {
 function mapaStart()   
 {   
     
-                let position = { lat: 50, lng: 50 };
+                position = { lat: 50, lng: 50 };
                 // The map, centered at position
                 let map =  new google.maps.Map(document.querySelector("#mapView"),
                     {
@@ -79,7 +101,5 @@ function mapaStart()
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARkS-dsh-7IirtcQg3oSZEHudV6Uw9Iic&callback=mapaStart" async
-        defer>
-        </script>
+
 </html>
