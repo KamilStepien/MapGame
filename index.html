@@ -22,8 +22,8 @@
         <div id="boxMarkerSrc">
             <ul>
                 <li><i class="fas fa-map-marker"></i></li>
-                <li> <input type="text" name="" id=""></li>
-                <li><input type="button" value="Add"></i></li>
+                <li> <input type="text" name=""  id="avatarSrc"></li>
+                <li><input type="button" id="addAvatar" value="Add"></i></li>
             </ul>
            
         </div>
@@ -86,9 +86,14 @@ document.querySelector("#mapView").addEventListener("mousemove",(e)=>
 document.querySelector("#addName").addEventListener('click', (e)=>
 {
     if(!document.querySelector("#textName").value==" ")
-    document.querySelector("#nick p").innerHTML = document.querySelector("#textName").value;
+    nick= document.querySelector("#textName").value;
     else
-    document.querySelector("#nick p").innerHTML = "Anonimus";
+    nick = "Anonimus";
+
+    document.querySelector("#nick p").innerHTML = nick;
+
+    //dodawnie niku do markera
+     marker.setTitle( nick );
 })
 
 
@@ -99,9 +104,20 @@ function displayPosition()
     document.querySelector("#Lng").innerHTML  =  position.lng.toFixed(2);
 }
 
+//funkcja zmieniająca awatar
+document.querySelector("#addAvatar").addEventListener('click',  ()=>{
+   
+    markerSrc = document.querySelector("#avatarSrc").value;
+    AvatarImg = 
+    {
+        url: markerSrc,
+        scaledSize: new google.maps.Size( 27 ,43),
+        
+    };
+    marker.setIcon( AvatarImg );
 
 
-
+});
 /*
 //Tworzymy websocket
 var socket = new WebSocket("ws://achex.ca:4010");
@@ -144,7 +160,7 @@ function mapaStart()
                         
                     });
 
-                marker = new google.maps.Marker({position: position, map: map})
+                marker = new google.maps.Marker({position: position, map: map ,animation: google.maps.Animation.DROP,})
 
 }   
 
