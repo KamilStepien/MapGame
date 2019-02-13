@@ -77,7 +77,7 @@ h5{
     margin-left: 5px;
     font-weight: 400;
 }
-#boxName , #boxMarkerSrc
+#boxName , #boxMarkerSrc , #Info
 {
     position: absolute;
     left: -40px;
@@ -91,20 +91,23 @@ h5{
     display: flex;
     align-items: center;
 }
-#boxName ul , #boxMarkerSrc ul
+#Info
+{
+    width: 290px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+#boxName ul , #boxMarkerSrc ul  ,#Info>ul
 {
     display: flex;
     align-items: center;
 }
-#boxName li , #boxMarkerSrc li
+#boxName li , #boxMarkerSrc li , #Info  li
 {
     padding-right: 15px;
 }
-#boxName li , #boxMarkerSrc li
-{
-    padding-right: 15px;
-}
-#boxMarkerSrc i , #boxName i
+
+#boxMarkerSrc i , #boxName i, #Info i
 {
     color:  rgb(232, 103, 107);
     opacity: 0.3;
@@ -119,6 +122,17 @@ h5{
 {
     top: 50px;
 }
+#Info
+{
+    top: 90px;
+    overflow: hidden;
+}
+
+#Info:hover i
+{
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 
 #boxMarkerSrc:hover i
 {
@@ -132,6 +146,12 @@ h5{
     transition: opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+#Info:hover
+{
+    left: -290px;
+    height: 100px;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 
 #boxMarkerSrc:hover
 {
