@@ -15,14 +15,14 @@
         <div id="boxName">
             <ul>
                     <li><i class="fas fa-signature"></i></li>
-                    <li> <input type="text" maxlength="11" name="" id="textName"></li>
+                    <li> <input type="text" maxlength="11" Value ="PlayerName"name="" id="textName"></li>
                     <li><input type="button" id="addName" value="Add"></i></li>
                 </ul>
         </div>
         <div id="boxMarkerSrc">
             <ul>
                 <li><i class="fas fa-map-marker"></i></li>
-                <li> <input type="text" name=""  id="avatarSrc"></li>
+                <li> <input type="text" name="" value="SrcMarker" id="avatarSrc"></li>
                 <li><input type="button" id="addAvatar" value="Add"></i></li>
             </ul>
            
@@ -35,7 +35,7 @@
                         <ul>
                             <li>1 Wpisz swoją nazwę i zatwierdź klikając w przycisk</li>
                             <li>2 Jeśli chcesz możesz zmienić swój marker (zdjecie)</li>
-                            <li>3.....</li>
+                            <li>Porusznie markerem za pomocą <br> W S A D</li>
 
                             <li>4....</li>
 
@@ -71,7 +71,7 @@ let position;
 let map;
 let nick = "Anonimus";
 let markerSrc;
-let players = {};
+let players = [];
 var ws;
 
 //funkcja odpowiedzialna za poruszanie markerem za pomocą przucisków w,a,s,d
@@ -100,7 +100,7 @@ document.addEventListener("keydown" , (e)=>
     map.setCenter(position);
   
 
-    ws.send(JSON.stringify(wsData))
+    //ws.send(JSON.stringify(wsData))
     displayPosition();
     
 })
@@ -155,46 +155,62 @@ document.querySelector("#addAvatar").addEventListener('click',  ()=>{
 //funkcja reagujoca na wciśniecie przycisku send i wysyłająca widomość
 document.querySelector("#sendMessage").addEventListener('click',  ()=>
 {
-    addMessage();
-
-
-
-
+    let text = document.querySelector("#textMessage").value;
+    //addMessage(nick,text);
+    let message =  
+    {
+        messageText:text,
+        mesaggeName:nick
+    }
+    ws.send(JSON.stringify(message));
 }
 )
 
 
 ///funkcja dodająca wiadomość do chatBoxa
-function addMessage()
+function addMessage(Name , text )
 {
 
     let newDiv =  document.createElement('div');
     newDiv.className = "massage";
-    newDiv.innerHTML = '<h6 class = "PlayerNick">'+nick+':</h6>  <p class="PlayerText">'+document.querySelector("#textMessage").value+'</p>';
+    newDiv.innerHTML = '<h6 class = "PlayerNick">'+Name+':</h6>  <p class="PlayerText">'+text+'</p>';
     document.querySelector("#textMessage").value = " ";
     document.querySelector("#czat").appendChild(newDiv);
 }
 //websocket/////////////////////////////////////
 function startWebSocket() {
-    let url = 'ws://echo.websocket.org'
-    ws = new WebSocket(url)
-    ws.addEventListener('open', onWSOpen)
-    ws.addEventListener('message', onWSMessage)
+    let url = 'ws://design.net.pl:8010'
+    ws = new WebSocket(url);
+    ws.addEventListener('onclose ' , onWSClose());
+    ws.addEventListener('open', onWSOpen());
+    ws.addEventListener('message', function(e) { onWSMessage(e)});
+    ws.addEventListener('onerror',  onWSError() );
 }
-
-function onWSOpen(data) {
-    console.log(data)
+//funkcja wyswietlająca w czacie widomość gdy serwer jest dostępny
+function onWSOpen() {
     
+    addMessage("Server","Serwer WebSocket jest Online");
 }
+//funkcja wyświetlajoca w czacie widomość gdy serwer jest niedostępny
+function onWSClose() {
+    
+    addMessage("Server","Serwer WebSocket jest Offline");
+}
+//funkcja wyświetlajoca w czacie widomość gdy wystopi błąd komunikacji
+function onWSError() {
+    
+    addMessage("Server","Wystąpił błąd komunikacji");
+}
+//funkcja uruchamiana  gdy dostaniemy wiadomość od serwera 
 function onWSMessage(e) {
     
-    
-   
    
     let data = JSON.parse(e.data);
     console.log(data);
+    
+    addMessage(data.mesaggeName,data.messageText);
 
-
+    /*
     if (!players[ data.id]) {
         players[ data.id] = new google.maps.Marker({
             position: { lat: data.lat, lng: data.lng },
@@ -207,6 +223,7 @@ function onWSMessage(e) {
             lng: data.lng
         })
     }
+    */
 }
 
 // mapa /////////////////////////////////////////////////
