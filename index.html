@@ -33,11 +33,11 @@
                     <li><i class="fas fa-info"></i></li>
                     <li> <div id ="rules">
                         <ul>
-                            <li>1 Wpisz swoją nazwę i zatwierdź klikając w przycisk</li>
-                            <li>2 Jeśli chcesz możesz zmienić swój marker (zdjecie)</li>
+                            
+                            <li>Jeśli chcesz możesz zmienić swój marker (zdjecie)</li>
                             <li>Porusznie markerem za pomocą <br> W S A D</li>
 
-                            <li>4....</li>
+                           
 
                         </ul>
                     </div></li>
@@ -86,7 +86,8 @@ let ws;
 //funkcja odpowiedzialna za poruszanie markerem za pomocą przucisków w,a,s,d
 document.addEventListener("keydown" , (e)=>
 {
-    if (!nick == " ") {
+    
+    if (nick != " ") {
         switch (e.keyCode) {
             case 87: position.lat += 0.05;
                 break;
@@ -218,7 +219,7 @@ function onWSMessage(e) {
    
     let data = JSON.parse(e.data);
     console.log(data);
-    if(!data.id == " ")
+    if(data.id != " ")
     {
         //sprawdzanie jakiego typu obiekt przyszedł z servera
         if (data.type == "Position") {
