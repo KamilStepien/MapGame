@@ -162,7 +162,7 @@ document.querySelector("#addAvatar").addEventListener('click',  ()=>{
 
 });
 
-//funkcja reagujoca na wciśniecie przycisku send i wysyłająca widomość
+//funkcja reagująca na wciśniecie przycisku send i wysyłająca widomość
 document.querySelector("#sendMessage").addEventListener('click',  ()=>
 {
     let text = document.querySelector("#textMessage").value;
@@ -198,14 +198,14 @@ function startWebSocket() {
         //funkcja wyswietlająca w czacie widomość gdy serwer jest dostępny
         addMessage("Server", "Serwer WebSocket jest Online", "color:  green");
     };
-    //funkcja wyświetlajoca w czacie widomość gdy serwer jest niedostępny
+    //funkcja wyświetlająca w czacie widomość gdy serwer jest niedostępny
     ws.onclose = function (event)  {
         console.warn("WebSocket is closed now.") ;
         addMessage("Server", "Serwer WebSocket jest Offline" , "color:  red");
     };
     // uruchamiana  funkcje gdy dostaniemy wiadomość od serwera 
     ws.onmessage  = function (event) { onWSMessage(event) };
-    //funkcja wyświetlajoca w czacie widomość gdy wystopi błąd komunikacji
+    //funkcja wyświetlająca w czacie widomość gdy wystopi błąd komunikacji
     ws.onerror = function (event)  {
 
         addMessage("Server", "Wystąpił błąd komunikacji", "color:  orange");
